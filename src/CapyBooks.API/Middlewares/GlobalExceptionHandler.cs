@@ -25,6 +25,7 @@ public class GlobalExceptionHandler : IExceptionHandler
             ValidationException => (StatusCodes.Status400BadRequest, "Erro de validação."),
             DomainException => (StatusCodes.Status400BadRequest, exception.Message),
             AuthenticationException => (StatusCodes.Status401Unauthorized, exception.Message),
+            NotFoundException => (StatusCodes.Status404NotFound, exception.Message),
             ConflictException => (StatusCodes.Status409Conflict, exception.Message),
             _ => (StatusCodes.Status500InternalServerError, "Ocorreu um erro inesperado.")
         };

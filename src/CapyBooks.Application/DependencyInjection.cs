@@ -16,6 +16,8 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(assembly);
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IBookService, BookService>();
+        services.AddScoped<IGenreService, GenreService>();
 
         // Demais casos de uso e services de aplicação serão registrados aqui conforme forem implementados.
 

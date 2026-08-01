@@ -1,6 +1,9 @@
 using CapyBooks.Application.Interfaces;
 using CapyBooks.Domain.Interfaces;
 using CapyBooks.Infrastructure.Authentication;
+using CapyBooks.Infrastructure.ExternalServices;
+using CapyBooks.Infrastructure.ExternalServices.GoogleBooks;
+using CapyBooks.Infrastructure.ExternalServices.OpenLibrary;
 using CapyBooks.Infrastructure.Persistence;
 using CapyBooks.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -37,8 +40,19 @@ public static class DependencyInjection
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IGoogleTokenValidator, GoogleTokenValidator>();
 
-        // Serviços externos de dados de livros (Open Library, Google Books) serão
-        // registrados aqui conforme forem implementados.
+        services.AddHttpClient<OpenLibraryService>(client =>
+        {
+            client.BaseAddress = new Uri("https://openlibrary.org/");
+            client.Timeout = TimeSpan.FromSeconds(10);
+        });
+
+        services.AddHttpClient<GoogleBooksService>(client =>
+        {
+            client.BaseAddress = new Uri("https://www.googleapis.com/books/v1/");
+            client.Timeout = TimeSpan.FromSeconds(10);
+        });
+
+        services.AddScoped<IExternalBookSearchService, ExternalBookSearchService>();
 
         return services;
     }
