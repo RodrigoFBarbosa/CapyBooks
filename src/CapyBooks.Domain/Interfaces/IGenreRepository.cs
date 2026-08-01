@@ -1,0 +1,8 @@
+using CapyBooks.Domain.Entities;
+
+namespace CapyBooks.Domain.Interfaces;
+
+public interface IGenreRepository : IRepository<Genre>
+{
+    Task<Genre?> GetByNameAsync(string name, CancellationToken cancellationToken = default);
+}
