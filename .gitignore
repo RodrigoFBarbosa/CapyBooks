@@ -1,0 +1,28 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+
+## Rider / VS
+.vs/
+.idea/
+*.DotSettings.user
+
+## Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+## Publish
+publish/
+*.publish.xml
+
+## Environment / secrets
+appsettings.*.local.json
+*.env
+.env
+
+## Angular / Node (frontend, quando criado)
+node_modules/
+dist/
+.angular/

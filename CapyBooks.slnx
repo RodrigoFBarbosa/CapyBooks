@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CapyBooks.API/CapyBooks.API.csproj" />
+    <Project Path="src/CapyBooks.Application/CapyBooks.Application.csproj" />
+    <Project Path="src/CapyBooks.Domain/CapyBooks.Domain.csproj" />
+    <Project Path="src/CapyBooks.Infrastructure/CapyBooks.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CapyBooks.Application.Tests/CapyBooks.Application.Tests.csproj" />
+    <Project Path="tests/CapyBooks.Domain.Tests/CapyBooks.Domain.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: capybooks-postgres
+    environment:
+      POSTGRES_DB: capybooks
+      POSTGRES_USER: capybooks
+      POSTGRES_PASSWORD: capybooks
+    ports:
+      - "5432:5432"
+    volumes:
+      - capybooks-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  capybooks-postgres-data:

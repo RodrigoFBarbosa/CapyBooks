@@ -1,0 +1,6 @@
+@CapyBooks.API_HostAddress = http://localhost:5058
+
+GET {{CapyBooks.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
