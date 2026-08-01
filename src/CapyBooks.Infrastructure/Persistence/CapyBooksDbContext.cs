@@ -18,6 +18,7 @@ public class CapyBooksDbContext : DbContext
     public DbSet<CustomList> CustomLists => Set<CustomList>();
     public DbSet<ListItem> ListItems => Set<ListItem>();
     public DbSet<ReadingLink> ReadingLinks => Set<ReadingLink>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

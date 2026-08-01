@@ -16,4 +16,7 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken = default) =>
         DbSet.AnyAsync(u => u.Email == email, cancellationToken);
+
+    public Task<User?> GetByGoogleIdAsync(string googleId, CancellationToken cancellationToken = default) =>
+        DbSet.FirstOrDefaultAsync(u => u.GoogleId == googleId, cancellationToken);
 }

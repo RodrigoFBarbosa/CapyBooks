@@ -1,4 +1,6 @@
 using System.Reflection;
+using CapyBooks.Application.Interfaces;
+using CapyBooks.Application.Services;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +15,9 @@ public static class DependencyInjection
         services.AddAutoMapper(cfg => { }, assembly);
         services.AddValidatorsFromAssembly(assembly);
 
-        // Casos de uso e services de aplicação serão registrados aqui conforme forem implementados.
+        services.AddScoped<IAuthService, AuthService>();
+
+        // Demais casos de uso e services de aplicação serão registrados aqui conforme forem implementados.
 
         return services;
     }

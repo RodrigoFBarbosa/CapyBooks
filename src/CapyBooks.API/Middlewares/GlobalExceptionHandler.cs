@@ -1,3 +1,6 @@
+using CapyBooks.Application.Common.Exceptions;
+using CapyBooks.Domain.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,17 +20,33 @@ public class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(exception, "Erro não tratado: {Message}", exception.Message);
+        var (statusCode, title) = exception switch
+        {
+            ValidationException => (StatusCodes.Status400BadRequest, "Erro de validação."),
+            DomainException => (StatusCodes.Status400BadRequest, exception.Message),
+            AuthenticationException => (StatusCodes.Status401Unauthorized, exception.Message),
+            ConflictException => (StatusCodes.Status409Conflict, exception.Message),
+            _ => (StatusCodes.Status500InternalServerError, "Ocorreu um erro inesperado.")
+        };
+
+        if (statusCode == StatusCodes.Status500InternalServerError)
+            _logger.LogError(exception, "Erro não tratado: {Message}", exception.Message);
 
         var problemDetails = new ProblemDetails
         {
-            Status = StatusCodes.Status500InternalServerError,
-            Title = "Ocorreu um erro inesperado.",
-            Detail = "Tente novamente mais tarde. Se o problema persistir, contate o suporte.",
+            Status = statusCode,
+            Title = title,
             Instance = httpContext.Request.Path
         };
 
-        httpContext.Response.StatusCode = problemDetails.Status.Value;
+        if (exception is ValidationException validationException)
+        {
+            problemDetails.Extensions["errors"] = validationException.Errors
+                .GroupBy(e => e.PropertyName)
+                .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray());
+        }
+
+        httpContext.Response.StatusCode = statusCode;
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 

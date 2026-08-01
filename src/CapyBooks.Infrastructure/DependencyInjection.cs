@@ -1,4 +1,6 @@
+using CapyBooks.Application.Interfaces;
 using CapyBooks.Domain.Interfaces;
+using CapyBooks.Infrastructure.Authentication;
 using CapyBooks.Infrastructure.Persistence;
 using CapyBooks.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -25,10 +27,18 @@ public static class DependencyInjection
         services.AddScoped<IBookshelfRepository, BookshelfRepository>();
         services.AddScoped<ICustomListRepository, CustomListRepository>();
         services.AddScoped<IReadingLinkRepository, ReadingLinkRepository>();
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        // Serviços externos (Open Library, Google Books) serão registrados aqui
-        // conforme forem implementados.
+        services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
+        services.Configure<GoogleAuthSettings>(configuration.GetSection("Authentication:Google"));
+
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IGoogleTokenValidator, GoogleTokenValidator>();
+
+        // Serviços externos de dados de livros (Open Library, Google Books) serão
+        // registrados aqui conforme forem implementados.
 
         return services;
     }

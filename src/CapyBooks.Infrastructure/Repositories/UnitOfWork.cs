@@ -15,7 +15,8 @@ public class UnitOfWork : IUnitOfWork
         IReviewRepository reviews,
         IBookshelfRepository bookshelves,
         ICustomListRepository customLists,
-        IReadingLinkRepository readingLinks)
+        IReadingLinkRepository readingLinks,
+        IRefreshTokenRepository refreshTokens)
     {
         _context = context;
         Users = users;
@@ -25,6 +26,7 @@ public class UnitOfWork : IUnitOfWork
         Bookshelves = bookshelves;
         CustomLists = customLists;
         ReadingLinks = readingLinks;
+        RefreshTokens = refreshTokens;
     }
 
     public IUserRepository Users { get; }
@@ -34,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
     public IBookshelfRepository Bookshelves { get; }
     public ICustomListRepository CustomLists { get; }
     public IReadingLinkRepository ReadingLinks { get; }
+    public IRefreshTokenRepository RefreshTokens { get; }
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
         _context.SaveChangesAsync(cancellationToken);

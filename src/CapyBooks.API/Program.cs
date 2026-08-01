@@ -1,5 +1,6 @@
 using System.Text;
 using Asp.Versioning;
+using CapyBooks.API.Filters;
 using CapyBooks.API.Middlewares;
 using CapyBooks.Application;
 using CapyBooks.Infrastructure;
@@ -11,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
 
 builder.Services
     .AddApiVersioning(options =>

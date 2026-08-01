@@ -9,6 +9,7 @@ public interface IUnitOfWork
     IBookshelfRepository Bookshelves { get; }
     ICustomListRepository CustomLists { get; }
     IReadingLinkRepository ReadingLinks { get; }
+    IRefreshTokenRepository RefreshTokens { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
