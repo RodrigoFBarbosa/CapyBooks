@@ -26,6 +26,7 @@ public class GlobalExceptionHandler : IExceptionHandler
             ValidationException => (StatusCodes.Status400BadRequest, "Erro de validação."),
             DomainException => (StatusCodes.Status400BadRequest, exception.Message),
             AuthenticationException => (StatusCodes.Status401Unauthorized, exception.Message),
+            ForbiddenException => (StatusCodes.Status403Forbidden, exception.Message),
             NotFoundException => (StatusCodes.Status404NotFound, exception.Message),
             ConflictException => (StatusCodes.Status409Conflict, exception.Message),
             DbUpdateException => (StatusCodes.Status409Conflict, "Não foi possível concluir a operação porque existem dados relacionados a este registro."),

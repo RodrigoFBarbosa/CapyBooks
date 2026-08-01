@@ -15,4 +15,6 @@ public interface IUserRepository : IRepository<User>
         int page,
         int pageSize,
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<User>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default);
 }

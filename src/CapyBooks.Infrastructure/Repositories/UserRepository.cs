@@ -45,4 +45,7 @@ public class UserRepository : Repository<User>, IUserRepository
 
         return (items, totalCount);
     }
+
+    public async Task<IReadOnlyList<User>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default) =>
+        await DbSet.Where(u => ids.Contains(u.Id)).ToListAsync(cancellationToken);
 }
