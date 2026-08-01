@@ -12,7 +12,9 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         services.AddDbContext<CapyBooksDbContext>(options =>
-            options.UseNpgsql(connectionString));
+            options
+                .UseNpgsql(connectionString)
+                .UseSnakeCaseNamingConvention());
 
         // Repositórios (IUserRepository, IBookRepository, etc.) e serviços externos
         // (Open Library, Google Books) serão registrados aqui conforme forem implementados.
