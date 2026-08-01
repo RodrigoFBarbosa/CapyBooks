@@ -46,4 +46,7 @@ public class BookRepository : Repository<Book>, IBookRepository
 
         return (items, totalCount);
     }
+
+    public async Task<IReadOnlyList<Book>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default) =>
+        await DbSet.Where(b => ids.Contains(b.Id)).ToListAsync(cancellationToken);
 }
