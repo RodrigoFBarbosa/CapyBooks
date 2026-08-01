@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IBookService, BookService>();
         services.AddScoped<IGenreService, GenreService>();
+        services.AddScoped<IUserService, UserService>();
 
         // Demais casos de uso e services de aplicação serão registrados aqui conforme forem implementados.
 

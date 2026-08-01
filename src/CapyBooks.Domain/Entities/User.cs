@@ -70,4 +70,9 @@ public class User : BaseEntity
 
         Name = name;
     }
+
+    public void ChangeRole(UserRole role)
+    {
+        Role = role;
+    }
 }

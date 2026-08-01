@@ -38,7 +38,7 @@ public class AuthServiceTests
             .Returns<object>(src =>
             {
                 var user = (User)src;
-                return new UserDto(user.Id, user.Name, user.Email, user.Role.ToString());
+                return new UserDto(user.Id, user.Name, user.Email, user.Role.ToString(), user.CreatedAt);
             });
 
         _sut = new AuthService(

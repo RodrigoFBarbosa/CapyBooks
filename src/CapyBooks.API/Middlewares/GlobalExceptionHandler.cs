@@ -3,6 +3,7 @@ using CapyBooks.Domain.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CapyBooks.API.Middlewares;
 
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler : IExceptionHandler
             AuthenticationException => (StatusCodes.Status401Unauthorized, exception.Message),
             NotFoundException => (StatusCodes.Status404NotFound, exception.Message),
             ConflictException => (StatusCodes.Status409Conflict, exception.Message),
+            DbUpdateException => (StatusCodes.Status409Conflict, "Não foi possível concluir a operação porque existem dados relacionados a este registro."),
             _ => (StatusCodes.Status500InternalServerError, "Ocorreu um erro inesperado.")
         };
 

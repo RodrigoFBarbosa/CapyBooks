@@ -54,4 +54,14 @@ public class UserTests
     {
         Assert.Throws<DomainException>(() => User.CreateLocal(name, "rodrigo@example.com", "hash"));
     }
+
+    [Fact]
+    public void ChangeRole_UpdatesRole()
+    {
+        var user = User.CreateLocal("Rodrigo", "rodrigo@example.com", "hash");
+
+        user.ChangeRole(UserRole.Admin);
+
+        Assert.Equal(UserRole.Admin, user.Role);
+    }
 }
