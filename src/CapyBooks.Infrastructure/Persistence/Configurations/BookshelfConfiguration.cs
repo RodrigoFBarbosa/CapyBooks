@@ -10,6 +10,9 @@ public class BookshelfConfiguration : IEntityTypeConfiguration<Bookshelf>
     {
         builder.HasKey(b => b.Id);
 
+        builder.Property(b => b.Id)
+            .ValueGeneratedNever();
+
         builder.Property(b => b.Status)
             .IsRequired()
             .HasConversion<string>()

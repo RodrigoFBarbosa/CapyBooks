@@ -10,6 +10,9 @@ public class CustomListConfiguration : IEntityTypeConfiguration<CustomList>
     {
         builder.HasKey(c => c.Id);
 
+        builder.Property(c => c.Id)
+            .ValueGeneratedNever();
+
         builder.Property(c => c.Name)
             .IsRequired()
             .HasMaxLength(200);

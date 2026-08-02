@@ -10,6 +10,9 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
     {
         builder.HasKey(r => r.Id);
 
+        builder.Property(r => r.Id)
+            .ValueGeneratedNever();
+
         builder.Property(r => r.Rating)
             .IsRequired();
 

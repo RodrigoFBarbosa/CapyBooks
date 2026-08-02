@@ -10,6 +10,9 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
     {
         builder.HasKey(b => b.Id);
 
+        builder.Property(b => b.Id)
+            .ValueGeneratedNever();
+
         builder.Property(b => b.Title)
             .IsRequired()
             .HasMaxLength(500);

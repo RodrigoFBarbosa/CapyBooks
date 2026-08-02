@@ -21,6 +21,7 @@ public static class DependencyInjection
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IReviewService, ReviewService>();
         services.AddScoped<IBookshelfService, BookshelfService>();
+        services.AddScoped<ICustomListService, CustomListService>();
 
         // Demais casos de uso e services de aplicação serão registrados aqui conforme forem implementados.
 
